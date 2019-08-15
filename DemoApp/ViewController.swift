@@ -14,15 +14,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print(BackTrace.main_thread_t)
+//        print(BackTrace.main_thread_t)
+//
+//        DispatchQueue.global().async {
+//            let frames = BackTrace.callStack(.main)
+//
+//            for frame in frames {
+//                print(frame.demangledSymbol)
+//            }
+//        }
 
-        DispatchQueue.global().async {
-            let frames = BackTrace.callStack(.main)
+        TimeMonitor.shared.startMonitor(duration: 0.05)
 
-            for frame in frames {
-                print(frame.demangledSymbol)
-            }
-        }
+        testA()
     }
 
     func testA() {

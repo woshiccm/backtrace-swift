@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C2CB7B523059C49007FB014 /* TimeMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2CB7B423059C49007FB014 /* TimeMonitor.swift */; };
 		9CCC945923053F2300DE3B2B /* backtrace_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CCC945723053F2300DE3B2B /* backtrace_swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CCC946123053F5200DE3B2B /* BackTraceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CCC945F23053F5200DE3B2B /* BackTraceHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CCC946223053F5200DE3B2B /* BackTraceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCC946023053F5200DE3B2B /* BackTraceHelper.m */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C2CB7B423059C49007FB014 /* TimeMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeMonitor.swift; sourceTree = "<group>"; };
 		9CCC945423053F2300DE3B2B /* backtrace_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = backtrace_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CCC945723053F2300DE3B2B /* backtrace_swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = backtrace_swift.h; sourceTree = "<group>"; };
 		9CCC945823053F2300DE3B2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				9CCC945F23053F5200DE3B2B /* BackTraceHelper.h */,
 				9CCC946023053F5200DE3B2B /* BackTraceHelper.m */,
 				9CCC94632305402200DE3B2B /* BackTrace.swift */,
+				9C2CB7B423059C49007FB014 /* TimeMonitor.swift */,
 				9CCC945823053F2300DE3B2B /* Info.plist */,
 			);
 			path = "backtrace-swift";
@@ -209,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CCC94642305402200DE3B2B /* BackTrace.swift in Sources */,
+				9C2CB7B523059C49007FB014 /* TimeMonitor.swift in Sources */,
 				9CCC946223053F5200DE3B2B /* BackTraceHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

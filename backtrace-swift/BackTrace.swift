@@ -48,16 +48,16 @@ public class BackTrace: NSObject {
         case current
     }
 
-    public static func callStack(with type: CallStackType) -> [StackFrame] {
-        return []
-    }
+//    public static func callStack(with type: CallStackType) -> [StackFrame] {
+//        return []
+//    }
 
     public static func callStack(_ thread: Thread) -> [StackFrame] {
         var symbols = [StackFrame]()
         let stackSize: Int32 = 256
         let addrs = UnsafeMutablePointer<UnsafeMutableRawPointer?>.allocate(capacity: Int(stackSize))
         defer { addrs.deallocate() }
-        guard let pthread = pthread_from_mach_thread_np(main_thread_t) else {
+        guard let pthread = pthread_from_mach_thread_np(transformToMachThread(thread)) else {
             return []
         }
 
