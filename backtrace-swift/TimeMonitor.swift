@@ -21,31 +21,14 @@ public class TimeMonitor: NSObject {
         queue = DispatchQueue(label: "com.backtrace.timeMonitor")
         monitoringTimer = DispatchSource.makeTimerSource(flags: [], queue: queue)
         monitoringTimer?.schedule(deadline: .now() + duration, repeating: 0)
-        monitoringTimer?.setEventHandler {
-            var symbols = [StackFrame]()
-            let stackSize: Int32 = 256
-            let addrs = UnsafeMutablePointer<UnsafeMutableRawPointer?>.allocate(capacity: Int(stackSize))
-            defer { addrs.deallocate() }
-            let pthread = pthread_from_mach_thread_np(self.main_thread_t)
-            let frameCount = GetCallstack(pthread, addrs, stackSize)
-            let buf = UnsafeBufferPointer(start: addrs, count: Int(frameCount))
-            for addr in buf {
-                guard let addr = addr else { continue }
-                var dlInfoPtr = UnsafeMutablePointer<Dl_info>.allocate(capacity: 1)
-                defer { dlInfoPtr.deallocate() }
-                guard dladdr(addr, dlInfoPtr) != 0 else {
-                    continue
-                }
-                let info = dlInfoPtr.pointee
-                let symbol = String(cString: info.dli_sname)
-                let filename = String(cString: info.dli_fname)
-                let symAddrValue = unsafeBitCast(info.dli_saddr, to: UInt64.self)
-                let addrValue = UInt64(UInt(bitPattern: addr))
-                symbols.append(StackFrame(symbol: symbol, file: filename, address: addrValue, symbolAddress: symAddrValue))
-            }
 
-            for frame in symbols {
-                print(frame.demangledSymbol)
+        monitoringTimer?.setEventHandler {
+            if let pthread = pthread_from_mach_thread_np(self.main_thread_t) {
+                if let symbols = getCallStack(pthread) {
+                    for symbol in symbols {
+                        print(symbol.demangledSymbol)
+                    }
+                }
             }
         }
 

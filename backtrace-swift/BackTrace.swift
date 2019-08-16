@@ -42,16 +42,6 @@ public class BackTrace: NSObject {
 
     public static let main_thread_t = mach_thread_self()
 
-    public enum CallStackType {
-        case all
-        case main
-        case current
-    }
-
-//    public static func callStack(with type: CallStackType) -> [StackFrame] {
-//        return []
-//    }
-
     public static func callStack(_ thread: Thread) -> [StackFrame] {
         var symbols = [StackFrame]()
         let stackSize: Int32 = 256

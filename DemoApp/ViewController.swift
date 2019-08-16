@@ -13,19 +13,23 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        print(BackTrace.main_thread_t)
-//
 //        DispatchQueue.global().async {
 //            let frames = BackTrace.callStack(.main)
 //
 //            for frame in frames {
 //                print(frame.demangledSymbol)
 //            }
+//
+//            if let pthread = pthread_from_mach_thread_np(self.main_thread_t) {
+//                var symbols = getCallStack(pthread)
+//
+//                for symbol in symbols {
+//                    print(symbol.demangledSymbol)
+//                }
+//            }
 //        }
 
         TimeMonitor.shared.startMonitor(duration: 0.05)
-
         testA()
     }
 
@@ -34,7 +38,10 @@ class ViewController: UIViewController {
     }
 
     func testB() {
+        testC()
+    }
 
+    func testC() {
         while true {
 
         }

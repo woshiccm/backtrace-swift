@@ -5,6 +5,11 @@
 //  Created by roy.cao on 2019/8/15.
 //  Copyright © 2019 roy. All rights reserved.
 //
+// https://stackoverflow.com/questions/4765158/printing-a-stack-trace-from-another-thread
+// https://github.com/gnachman/iTerm2/blob/d2cf24a9262432cff459145a73d5e7a5449a65b0/sources/iTermBacktrace.mm
+// https://github.com/albertz/openlierox/blob/0.59/src/common/Debug_GetCallstack.cpp
+
+
 #import <Foundation/Foundation.h>
 #include <pthread.h>
 #include <execinfo.h>
@@ -17,18 +22,19 @@ static int threadCallstackCount = 0;
 
 #define CALLSTACK_SIG SIGUSR2
 
-void *GetPCFromUContext(void *secret) {
-    // See this article for further details: (thanks also for some code snippets)
-    // http://www.linuxjournal.com/article/6391
-
-    void *pnt = NULL;
-    // This bit is x86-64 specific. Have fun fixing this when ARM Macs come out next year :)
-    // This might possibly be right: ucp->m_context.ctx.arm_pc
-    ucontext_t* uc = (ucontext_t*) secret;
-    pnt = (void*) uc->uc_mcontext->__ss.__rip ;
-
-    return pnt;
-}
+// this only can test with Simulator, is x86-64 specific, more in https://github.com/albertz/openlierox/blob/de62596b0b4dc72f8ece135221d7641ca943e592/src/common/Debug_GetPCFromUContext.cpp
+//void *GetPCFromUContext(void *secret) {
+//    // See this article for further details: (thanks also for some code snippets)
+//    // http://www.linuxjournal.com/article/6391
+//
+//    void *pnt = NULL;
+//    // This bit is x86-64 specific. Have fun fixing this when ARM Macs come out next year :)
+//    // This might possibly be right: ucp->m_context.ctx.arm_pc
+//    ucontext_t* uc = (ucontext_t*) secret;
+//    pnt = (void*) uc->uc_mcontext->__ss.__rip ;
+//
+//    return pnt;
+//}
 
 __attribute__((noinline))
 static void _callstack_signal_handler(int signr, siginfo_t *info, void *secret) {
@@ -48,7 +54,9 @@ static void _callstack_signal_handler(int signr, siginfo_t *info, void *secret) 
         const int IgnoreTopFrameNum = i;
         threadCallstackCount -= IgnoreTopFrameNum;
         memmove(threadCallstackBuffer, threadCallstackBuffer + IgnoreTopFrameNum, threadCallstackCount * sizeof(void*));
-        threadCallstackBuffer[0] = GetPCFromUContext(secret); // replace by real PC ptr
+
+        // this only can test with Simulator, is x86-64 specific
+//        threadCallstackBuffer[0] = GetPCFromUContext(secret); // replace by real PC ptr
         break;
     }
 
