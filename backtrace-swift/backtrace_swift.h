@@ -15,6 +15,3 @@ FOUNDATION_EXPORT double backtrace_swiftVersionNumber;
 FOUNDATION_EXPORT const unsigned char backtrace_swiftVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <backtrace_swift/PublicHeader.h>
-
-
-#import "BackTraceHelper.h"

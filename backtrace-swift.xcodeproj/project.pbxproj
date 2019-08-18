@@ -10,8 +10,6 @@
 		9C2CB7B523059C49007FB014 /* TimeMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2CB7B423059C49007FB014 /* TimeMonitor.swift */; };
 		9C2CB7BB23064FE0007FB014 /* CallStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2CB7BA23064FE0007FB014 /* CallStack.swift */; };
 		9CCC945923053F2300DE3B2B /* backtrace_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CCC945723053F2300DE3B2B /* backtrace_swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9CCC946123053F5200DE3B2B /* BackTraceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CCC945F23053F5200DE3B2B /* BackTraceHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9CCC946223053F5200DE3B2B /* BackTraceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCC946023053F5200DE3B2B /* BackTraceHelper.m */; };
 		9CCC94642305402200DE3B2B /* BackTrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCC94632305402200DE3B2B /* BackTrace.swift */; };
 		9CCC946C23055C6100DE3B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCC946B23055C6100DE3B2B /* AppDelegate.swift */; };
 		9CCC946E23055C6100DE3B2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCC946D23055C6100DE3B2B /* ViewController.swift */; };
@@ -26,8 +24,6 @@
 		9CCC945423053F2300DE3B2B /* backtrace_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = backtrace_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CCC945723053F2300DE3B2B /* backtrace_swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = backtrace_swift.h; sourceTree = "<group>"; };
 		9CCC945823053F2300DE3B2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9CCC945F23053F5200DE3B2B /* BackTraceHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackTraceHelper.h; sourceTree = "<group>"; };
-		9CCC946023053F5200DE3B2B /* BackTraceHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackTraceHelper.m; sourceTree = "<group>"; };
 		9CCC94632305402200DE3B2B /* BackTrace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackTrace.swift; sourceTree = "<group>"; };
 		9CCC946923055C6100DE3B2B /* DemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CCC946B23055C6100DE3B2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,8 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				9CCC945723053F2300DE3B2B /* backtrace_swift.h */,
-				9CCC945F23053F5200DE3B2B /* BackTraceHelper.h */,
-				9CCC946023053F5200DE3B2B /* BackTraceHelper.m */,
 				9CCC94632305402200DE3B2B /* BackTrace.swift */,
 				9C2CB7BA23064FE0007FB014 /* CallStack.swift */,
 				9C2CB7B423059C49007FB014 /* TimeMonitor.swift */,
@@ -109,7 +103,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CCC945923053F2300DE3B2B /* backtrace_swift.h in Headers */,
-				9CCC946123053F5200DE3B2B /* BackTraceHelper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +209,6 @@
 			files = (
 				9CCC94642305402200DE3B2B /* BackTrace.swift in Sources */,
 				9C2CB7B523059C49007FB014 /* TimeMonitor.swift in Sources */,
-				9CCC946223053F5200DE3B2B /* BackTraceHelper.m in Sources */,
 				9C2CB7BB23064FE0007FB014 /* CallStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

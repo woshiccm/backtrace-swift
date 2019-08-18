@@ -18,7 +18,7 @@ public class TimeMonitor: NSObject {
     var queue: DispatchQueue?
 
     public func startMonitor(duration: Double) {
-        queue = DispatchQueue(label: "com.backtrace.timeMonitor")
+        queue = DispatchQueue.global(qos: .userInitiated)
         monitoringTimer = DispatchSource.makeTimerSource(flags: [], queue: queue)
         monitoringTimer?.schedule(deadline: .now() + duration, repeating: 0)
 

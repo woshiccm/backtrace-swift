@@ -76,33 +76,37 @@ private func frame() -> [StackFrame]? {
     return symbols
 }
 
-extension String {
-    fileprivate subscript(range: NSRange) -> String? {
-        return Range(range, in: self).flatMap { String(self[$0]) }
-    }
-}
+@_silgen_name("backtrace")
+public func backtrace(_ stack: UnsafeMutablePointer<UnsafeMutableRawPointer?>!, _ maxSymbols: Int32) -> Int32
+@_silgen_name("backtrace_symbols")
+public func backtrace_symbols(_ stack: UnsafePointer<UnsafeMutableRawPointer?>!, _ frame: Int32) -> UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>!
 
+@_silgen_name("swift_demangle")
+public
+func _stdlib_demangleImpl(
+    mangledName: UnsafePointer<CChar>?,
+    mangledNameLength: UInt,
+    outputBuffer: UnsafeMutablePointer<CChar>?,
+    outputBufferSize: UnsafeMutablePointer<UInt>?,
+    flags: UInt32
+    ) -> UnsafeMutablePointer<CChar>?
 
-func dumpStrackTrace() -> String {
-    var callstack = [UnsafeMutableRawPointer?](repeating: nil, count: 128)
-    var stackTrace = ""
+public func _stdlib_demangleName(_ mangledName: String) -> String {
+    return mangledName.utf8CString.withUnsafeBufferPointer {
+        (mangledNameUTF8CStr) in
 
-    let frames = backtrace(&callstack, Int32(callstack.count))
-    if let symbols = backtrace_symbols(&callstack, frames) {
-        let regexp = try! NSRegularExpression(pattern: "^(?:\\S+ +){3}(\\S+) ", options: [])
+        let demangledNamePtr = _stdlib_demangleImpl(
+            mangledName: mangledNameUTF8CStr.baseAddress,
+            mangledNameLength: UInt(mangledNameUTF8CStr.count - 1),
+            outputBuffer: nil,
+            outputBufferSize: nil,
+            flags: 0)
 
-        for frame in 0 ..< Int(frames) where symbols[frame] != nil {
-            let symbol = String(cString: symbols[frame]!)
-            if let match = regexp.firstMatch(in: symbol, options: [], range: NSMakeRange(0, symbol.utf16.count)) {
-                let symbol = _stdlib_demangleName(symbol[match.range(at: 1)]!)
-                stackTrace += symbol + "\n"
-                if symbol == "main" {
-                    break
-                }
-            }
+        if let demangledNamePtr = demangledNamePtr {
+            let demangledName = String(cString: demangledNamePtr)
+            free(demangledNamePtr)
+            return demangledName
         }
-        free(symbols)
+        return mangledName
     }
-
-    return stackTrace
 }
