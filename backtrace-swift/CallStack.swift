@@ -5,6 +5,8 @@
 //  Created by roy.cao on 2019/8/16.
 //  Copyright © 2019 roy. All rights reserved.
 //
+// https://stackoverflow.com/questions/4765158/printing-a-stack-trace-from-another-thread
+// https://github.com/albertz/openlierox/blob/0.59/src/common/Debug_GetCallstack.cpp
 
 import Foundation
 import Darwin
@@ -12,6 +14,7 @@ import Darwin
 private var targetThread: pthread_t?
 private var callstack: [StackFrame]?
 
+@inline(never)
 private func signalHandler(code: Int32, info: UnsafeMutablePointer<__siginfo>?, uap: UnsafeMutableRawPointer?) -> Void {
     guard pthread_self() == targetThread else {
         return
@@ -29,6 +32,7 @@ private func setupCallStackSignalHandler() {
     }
 }
 
+@inline(never)
 public func getCallStack(_ threadId: pthread_t) -> [StackFrame]? {
     if threadId.hashValue == 0 || threadId == pthread_self() {
         return frame()

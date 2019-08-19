@@ -5,8 +5,6 @@
 //  Created by roy.cao on 2019/8/15.
 //  Copyright © 2019 roy. All rights reserved.
 //
-// https://stackoverflow.com/questions/4765158/printing-a-stack-trace-from-another-thread
-// https://github.com/albertz/openlierox/blob/0.59/src/common/Debug_GetCallstack.cpp
 
 import Foundation
 
